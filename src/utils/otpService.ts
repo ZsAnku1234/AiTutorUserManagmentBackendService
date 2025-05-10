@@ -25,15 +25,15 @@ export async function sendOtp(email: string, otp: string): Promise<void> {
         auth: {
           type: 'OAuth2',
           user: process.env.PROJECT_ID,
-          clientId:"62897073020-oqt09nr3pj1qk5v11i0t8ao3l170ls41.apps.googleusercontent.com",
-          clientSecret:"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",
+          clientId:process.env.GOOGLE_CLIENT_ID,
+          clientSecret:process.env.GOOGLE_CLIENT_SECRET,
           refreshToken:process.env.REFRESH_TOKEN,
           accessToken: accessToken.token || "",
         },
       });
   
       const mailOptions = {
-        from: 'tutorai86@gmail.com',
+        from: process.env.PROJECT_ID,
         to: email,
         subject: 'MyDreamFy OTP Code',
         text: `Hello,
