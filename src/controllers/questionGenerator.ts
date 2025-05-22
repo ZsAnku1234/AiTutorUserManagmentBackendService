@@ -12,9 +12,9 @@ interface Question {
 
 export const generateQuestions = async (req: AuthRequest, res: Response): Promise<void> => {
   try {
-    const { topics, subject, area } = req.body;
+    const { topics, subject, feedback } = req.body;
 
-    if (!topics || !subject || !area) {
+    if (!topics || !subject || !feedback) {
       res.status(400).json({ message: 'topics, subject, and area are required' });
       return;
     }
@@ -22,7 +22,7 @@ export const generateQuestions = async (req: AuthRequest, res: Response): Promis
     const user = req.user;
 
     // Correct destructuring of the result
-    const { questionSetId, questions } = await generateQuestionsFromTopicsTool(user, topics, subject, area);
+    const { questionSetId, questions } = await generateQuestionsFromTopicsTool(user, topics, subject, feedback);
 
     if (!questions || !questionSetId) {
       res.status(500).json({ message: 'Failed to generate questions' });
