@@ -5,12 +5,17 @@ import authRoutes from './routes/auth.routes';
 import userRoutes from './routes/user.routes';
 import SubjectCombination from './routes/subjectCombination.routes';
 import chapters  from './routes/mockTest.routes'
+import cors from 'cors';
+import questionRoutes from './routes/questionRoutes';
 const app = express();
+
+app.use(cors());
 app.use(express.json());
 app.use('/api/auth', authRoutes);
 app.use('/api/user', userRoutes);
 app.use('/api/subject', SubjectCombination)
 app.use('/api/mock',chapters)
+app.use('/api/questions', questionRoutes)
 
 mongoose.connect(process.env.MONGODB_URI || '')
   .then(() => console.log('MongoDB connected'))

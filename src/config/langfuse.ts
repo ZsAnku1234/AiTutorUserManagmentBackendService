@@ -4,7 +4,7 @@ const langfuse = new Langfuse({
     publicKey: process.env.LANGFUSE_PUBLIC_KEY,
     baseUrl: "https://cloud.langfuse.com"
 });
-export const compilePrompts = async (promptName: string, variables: Record<string, string>) => {
+export const compilePrompts = async (promptName: string, variables: Record<string, any>) => {
     try {
         const prompt = await langfuse.getPrompt(promptName);
         const compiledPrompt = prompt.compile(variables);
@@ -20,4 +20,5 @@ export const CONSTANTS = {
      * Identifier for web search chapters functionality.
      */
     WEB_SEARCH_CHAPTERS: 'webSearchChapters',
+    QUESTION_GENERATOR:'QuestionGenerator'
 } as const;
