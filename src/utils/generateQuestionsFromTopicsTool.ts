@@ -128,7 +128,7 @@ export const generateQuestionsFromTopicsTool = async (user: any, topics: string[
         const savedSet = await QuestionSetModel.create({
             userId: user._id,
             subject,
-            area: feedback, // ✅ assuming feedback is being used for area
+            feedback: feedback, // ✅ assuming feedback is being used for area
             topics,
             questions: JsonParsedResponse.questions,
         });
@@ -136,7 +136,13 @@ export const generateQuestionsFromTopicsTool = async (user: any, topics: string[
         // ✅ Return both saved set ID and parsed questions (e.g., for response and masking answers)
         return {
             questionSetId: savedSet._id,
-            questions: JsonParsedResponse.questions
+            questions: savedSet.questions.map((q: any) => ({
+                _id: q._id,
+                question: q.question,
+                options: q.options,
+                timeToSolve: q.timeToSolve
+                // ❌ Do not expose correctAnswer unless needed
+            }))
         };
 
     }

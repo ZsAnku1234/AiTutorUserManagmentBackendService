@@ -20,5 +20,6 @@ export const CONSTANTS = {
      * Identifier for web search chapters functionality.
      */
     WEB_SEARCH_CHAPTERS: 'webSearchChapters',
-    QUESTION_GENERATOR:'QuestionGenerator'
+    QUESTION_GENERATOR:'QuestionGenerator',
+    FEEDBACK_GENERATOR:'FeedbackGenerator'
 } as const;
