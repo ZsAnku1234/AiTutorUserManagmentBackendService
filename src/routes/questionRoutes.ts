@@ -1,6 +1,6 @@
 // routes/questionRoutes.ts
 import express from 'express';
-import { generateQuestions, getResults } from '../controllers/questionGenerator';
+import { generateQuestions, getResults, getQuizById } from '../controllers/questionGenerator';
 import { authenticate } from '../middleware/auth';
 
 const router = express.Router();
@@ -8,5 +8,7 @@ const router = express.Router();
 // POST /api/questions/generate
 router.post('/generate', authenticate, generateQuestions);
 router.post('/results',authenticate, getResults);
+
+router.get('/quiz/:quizId', authenticate, getQuizById);
 
 export default router;

@@ -149,4 +149,36 @@ export const getResults = async (req: AuthRequest, res: Response): Promise<void>
   }
 };
 
+export const getQuizById = async (req: AuthRequest, res: Response): Promise<void> => {
+  try {
+    const user = req.user;
+    if (!user) {
+      res.status(401).json({ message: 'Unauthorized' });
+      return;
+    }
+
+    const quizId = req.params.quizId;
+    if (!quizId) {
+      res.status(400).json({ message: 'Quiz ID is required' });
+      return;
+    }
+
+    const quiz = await UserResultModel.findOne({
+      _id: quizId,
+      userId: user._id 
+    });
+
+    if (!quiz) {
+      res.status(404).json({ message: 'Quiz not found' });
+      return;
+    }
+
+    res.status(200).json(quiz);
+
+  } catch (error) {
+    console.error('Error fetching quiz details:', error);
+    res.status(500).json({ message: 'Internal server error' });
+  }
+};
+
 

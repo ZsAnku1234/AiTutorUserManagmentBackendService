@@ -7,6 +7,7 @@ import SubjectCombination from './routes/subjectCombination.routes';
 import chapters  from './routes/mockTest.routes'
 import cors from 'cors';
 import questionRoutes from './routes/questionRoutes';
+import portalRoutes from './routes/portal.routes';
 const app = express();
 
 app.use(cors());
@@ -16,6 +17,7 @@ app.use('/api/user', userRoutes);
 app.use('/api/subject', SubjectCombination)
 app.use('/api/mock',chapters)
 app.use('/api/questions', questionRoutes)
+app.use('/api/portal', portalRoutes)
 
 mongoose.connect(process.env.MONGODB_URI || '')
   .then(() => console.log('MongoDB connected'))
